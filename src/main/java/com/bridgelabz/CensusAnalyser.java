@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CensusAnalyser {
     public static void main(String[] args) throws IOException, CensusException {
-        String filePathRead = "C:\\Users\\sandesh shetty\\IdeaProjects\\IndianStatesCensusAnalyser\\IndianStateCensusData";
+        String filePathRead = "C:\Users\panda\IdeaProjects\census analyser\src\main\resources\IndiaStateCensusData";
         String fileName = "IndianStateCensusData";
         String delimiter =",";
         List<String> stringName = new ArrayList<>();
