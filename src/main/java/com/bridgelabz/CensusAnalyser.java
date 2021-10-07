@@ -1,38 +1,31 @@
 package com.bridgelabz;
 
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-
 import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * program to load data from csv file
+ * To implement Indian States Census Analyser
  * @author Sreelipta
  * @since 2021-06-10
  */
 
 public class CensusAnalyser {
-    public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
-            CsvToBeanBuilder<IndiaCensusCSV> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
-            csvToBeanBuilder.withType(IndiaCensusCSV.class);
-            csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
-            CsvToBean<IndiaCensusCSV> csvToBean = csvToBeanBuilder.build();
-            Iterator<IndiaCensusCSV> censusCSVIterator = csvToBean.iterator();;
-            int namOfEateries = 0;
-            while (censusCSVIterator.hasNext()) {
-                namOfEateries++;
-                IndiaCensusCSV censusData = censusCSVIterator.next();
-            }
-            return namOfEateries;
-        } catch (IOException e) {
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }
+    public static void main(String[] args) throws IOException, CensusException {
+        String filePathRead = "C:\\Users\\sandesh shetty\\IdeaProjects\\IndianStatesCensusAnalyser\\IndianStateCensusData";
+        String fileName = "IndianStateCensusData";
+        String delimiter =",";
+        List<String> stringName = new ArrayList<>();
+        stringName.add("State");
+        stringName.add("Population");
+        stringName.add("AreaInSqKm");
+        stringName.add("DensityPerSqKm");
+
+        ReadOperation readObj = new ReadOperation();
+        int count = readObj.readDataCount(filePathRead, fileName);
+        System.out.println(count);
+
+        readObj.readDelimiter(filePathRead, delimiter);
+        readObj.readHeader(filePathRead, stringName);
     }
 }
